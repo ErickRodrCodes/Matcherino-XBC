@@ -9,7 +9,7 @@ This Plugin allows you to display your matcherino crowfunding campaings through 
 
 While this package is under approval by XSplit, you can drag the index.html file to the scene you want to display your matcherino donations.
 
-###Features
+### Features
 
 - Supports custom codes for your matcherino campaigns through it's respective ID
 - Full-featured: Real-time donations displays from matcherino
