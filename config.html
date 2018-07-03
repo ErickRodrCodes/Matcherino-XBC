@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="import" href="bower_components/xui/polymer.html">
+  <link rel="import" href="bower_components/xui/imports.html" />
+  <link rel="stylesheet" type="text/css" href="css/config.css">
+  <link rel="stylesheet" type="text/css" href="css/flexbox.css">
+</head>
+<body>
+  <xui-section label="Matcherino Notification Properties">
+    <div class="toolbox">
+      <div class="rows">
+        <div class="row">
+          <div class="row__item"><label class="desc">Donation Codes
+            <div class="generaltooltip">
+              <div class='generalinfo'>
+                <div>Donation Codes</div>
+                <span>
+                  Type the promo codes of each matcherino campaign separated<br>by commas. <br><br><b>Example: code1,code2,code3</b>
+                </span>
+              </div>
+              <div class="general">
+                <span>?</span>
+              </div>
+            </div>
+            <br>
+          </label></div>
+          <div class="row__item"><input type="text" id="matcherinoCodes"></div>
+        </div>
+        <div class="row">
+          <div class="row__item"><label class="desc">Matcherino Numeric ID's
+            <div class="generaltooltip">
+              <div class='generalinfo'>
+                <div>Matcherino Numeric ID's</div>
+                <span>
+                  Type the numeric ID's of each matcherino campaign in the same order you wrote your codes separated by commas. <br>
+                  <br><b>Example : 0001,0002,0003</b>
+                </span>
+              </div>
+              <div class="general">
+                <span>?</span>
+              </div>
+            </div>
+            <br>
+          </label></div>
+          <div class="row__item"><input type="text" id="matcherinoIds"></div>
+        </div>
+        <div class="row">
+          <div class="row__item"><label class="desc">Goals Position
+            <div class="generaltooltip">
+              <div class='generalinfo'>
+                <div>Goals Position</div>
+                <span>
+                  You indicate here the display position for the matcherino goals. Its position could be Top or Bottom
+                </span>
+              </div>
+              <div class="general">
+                <span>?</span>
+              </div>
+            </div>
+            <br>
+          </label></div>
+          <div class="row__item">
+            <select id="goalsPosition">
+              <option value="top">Top</option>
+              <option value="bottom">Bottom</option>
+            </select>
+        </div>
+        </div>
+        <div class="row" style="display: none">
+          <div class="row__item">
+            <label class="desc">Notification Pos.
+              <div class="generaltooltip">
+                <div class='generalinfo'>
+                  <div>Display Position</div>
+                  <span>
+                    The display notification position where donations or purchases rewards are shown on screen. Its position could be Top or Bottom.
+                  </span>
+                </div>
+                <div class="general">
+                  <span>?</span>
+                </div>
+              </div>
+              <br>
+            </label>
+          </div>
+          <div class="row__item">
+            <select id="positionNotification">
+              <option value="top">Top</option>
+              <option value="bottom">Bottom</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row__item">
+            <label class="desc">
+              <div class="generaltooltip">
+                <div class='generalinfo'>
+                  <div>Show latest notifications</div>
+                  <span>
+                    Leaving it checked will make the plugin to display the latest notifications from the Matcherino's campaign.<br><br>Leaving it unchecked, will display notifications from the start of the campaign. If changes happens to the plugin, each notification will restart again from the beggining.
+                  </span>
+                </div>
+                <div class="general">
+                  <span>?</span>
+                </div>
+              </div>
+              <br>
+            </label>
+            <label>Show latest notifications? <input type="checkbox" id="isNotificationLatest"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button id="submitData">Save Data</button>
+  </xui-section>
+  <script type="text/javascript" src="js/xjs-2.8.1.min.js"></script>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/config.js"></script>
+</body>
+</html>

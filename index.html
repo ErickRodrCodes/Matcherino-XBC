@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="xsplit:config-url" content="config.html">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="stylesheet" href="fonts/tungsten-semibold-webfont.css">
+  <title>Document</title>
+  <script>
+    window.external.SetLocalProperty("prop:Browser60fps", "1");
+  </script>
+  <style type="text/css">
+    .spinner{-webkit-animation:rotator 1.4s linear infinite;animation:rotator 1.4s linear infinite}@-webkit-keyframes rotator{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(270deg);transform:rotate(270deg)}}@keyframes rotator{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(270deg);transform:rotate(270deg)}}.path{stroke-dasharray:187;stroke-dashoffset:0;-webkit-transform-origin:center;transform-origin:center;-webkit-animation:dash 1.4s ease-in-out infinite,colors 5.6s ease-in-out infinite;animation:dash 1.4s ease-in-out infinite,colors 5.6s ease-in-out infinite}@-webkit-keyframes colors{0%,100%{stroke:#4285F4}25%{stroke:#DE3E35}50%{stroke:#F7C223}75%{stroke:#1B9A59}}@keyframes colors{0%,100%{stroke:#4285F4}25%{stroke:#DE3E35}50%{stroke:#F7C223}75%{stroke:#1B9A59}}@-webkit-keyframes dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;-webkit-transform:rotate(135deg);transform:rotate(135deg)}100%{stroke-dashoffset:187;-webkit-transform:rotate(450deg);transform:rotate(450deg)}}@keyframes dash{0%{stroke-dashoffset:187}50%{stroke-dashoffset:46.75;-webkit-transform:rotate(135deg);transform:rotate(135deg)}100%{stroke-dashoffset:187;-webkit-transform:rotate(450deg);transform:rotate(450deg)}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="queue"></div>
+    <div class="bgticker">
+      <div class="tickercontainer">
+        <span class="listContainer">
+          <ul>
+            <li>add $1 to the prize pool for free</li>
+            <li>code: CURLEH</li>
+            <li>Type [!command] to get the url donation link!</li>
+          </ul>
+        </span>
+        <div class="goalMetter">
+          <div class="gmContent">
+            <span class="labelPool">PRIZE POOL: </span>
+            <span class="current"></span>/
+            <span class="total"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="js/xjs-2.8.1.min.js"></script>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/notificationEngine.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+body, html{
+      padding:0;
+      margin:0;
+      font-family: 'tungsten-semibold-webfont';
+      overflow: hidden;
+      --purpleui : #491870;
+      --boxHeight: 36px;
+      --fontBox: 17px;
+      --bodyWidth:1920px;
+      --bodyHeight:1080px;
+    }
+    .container{
+      position: relative;
+      top:0;
+      left: 0;
+      width:var(--bodyWidth);
+      height:1080px;
+      overflow: hidden;
+      box-shadow: inset 0px 0px 2px #000;
+    }
+    .bgticker{
+      position: absolute;
+      width:100%;
+      height:36px;
+      background: var(--purpleui);
+      bottom:-36px;
+    }
+    .tickercontainer{
+      position: absolute;
+    bottom: 0;
+    height: var(--boxHeight);
+    width: var(--bodyWidth);
+    display: flex;
+    bottom:0;
+    }
+    .listContainer{
+      margin:auto 0;
+      position:relative;
+    }
+    .goalMetter{
+      height: var(--boxHeight);
+    background: #fff;
+    position: absolute;
+    right: 0;
+    z-index: 10;
+    font-size: 17px;
+    display: flex;
+    line-height: var(--boxHeight);
+    padding: 0 10px 0 0;
+    box-shadow: inset 0px 0px 0px 2px var(--purpleui);
+    }
+    .labelPool{
+          margin: auto 0;
+    padding-left: 10px;
+    }
+    .total, .highlight{
+      color:#f00;
+    }
+
+    .queue{
+      /* display: inline; */
+      height: var(--boxHeight);
+      box-shadow: inset 0px 0px 0px 2px var(--purpleui);
+      line-height: var(--boxHeight);
+      padding:0 10px 0 0;
+      font-size: 25px;
+      bottom:35px;
+      position:absolute;
+      z-index: 1;
+      background: #fff;
+      text-transform: uppercase;
+      left: -36px;
+    }
+
+    .queue img.avatar {
+      width: 32px;
+      margin: -3px 0 0 0;
+      vertical-align: middle;
+    }
+    .queue img.serviceLogo {
+      vertical-align: middle;
+      margin: -3px 9px 0;
+    }
+    
+    .matcherinoTicker {
+      display:flex;
+      width:var(--bodyWidth);
+      height: var(--boxHeight);
+      flex-direction: row;
+      justify-content: space-around;
+      opacity:0;
+      position: absolute;
+    }
+    .matcherinoTickerBottom{
+      bottom:0px;
+    }
+    .matcherinoTickerTop{
+      top:0px;
+    }
+    .tickerItem {
+    margin: auto 0;
+    line-height: var(--boxHeight);
+    font-size: 25px;
+    display:inline;
+    border:1px solid red;
+    padding: 0px 5px;
+    background: #fff;
+    text-transform: uppercase;
+    }
+    .nContent{
+      vertical-align: middle
+    }

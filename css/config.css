@@ -1,0 +1,289 @@
+@font-face
+{
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+  margin: 12px 0 0 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 10px;
+  padding: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+label {
+  font-size: 12px;
+  color: #CCC;
+
+}
+
+.desc {
+  font-size: 11px;
+  color: #888;
+}
+
+.keyInfo {
+  width: 180px;
+  height: 80px;
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 11px;
+  color: #888;
+  background-color: #080808;
+  border: 1px solid #888;
+  opacity: .95;
+  z-index: 1;
+  padding: 3px;
+}
+
+.generalinfo {
+  width: 180px;
+  height: auto;
+  position: absolute;
+  display: none;
+  left: 0;
+  top: 0;
+  padding: 3px;
+  font-size: 11px;
+  color: #888;
+  background-color: #080808;
+  border: 1px solid #888;
+  z-index: 10;
+}
+
+#lock + .generaltooltip .generalinfo {
+  height: auto;
+  top: -127px;
+  left: -100px;
+}
+
+#lock + .generaltooltip .generalinfo:hover + .general {
+  visibility: hidden;
+}
+
+#lock + .generaltooltip .generalinfo .generalTitle {
+  display: block;
+  background-color: #0098d4;
+  position: absolute;
+  width: 15px;
+  padding: 0;
+  margin: 4px;
+  top: 0;
+  left: 0;
+}
+
+#lock + .generaltooltip .generalinfo .generalTitle span {
+  color: #000000;
+  top: 0;
+  padding: 0;
+}
+
+.generalinfo span{
+  position: relative;
+  top: 10px;
+  left: 5px;
+  display: inline-block;
+  padding-right: 5px;
+  z-index: 99;
+}
+.keyInfo span {
+  position: relative;
+  top: 10px;
+  left: 5px;
+  display: inline-block;
+  padding-right: 5px;
+}
+
+.generalinfo div,
+.keyInfo div {
+  font-size: 12px;
+  color: #0095DE;
+  padding-left: 20px;
+}
+
+#info, .general, .generalTitle {
+  background-color: #3d3d3d;
+  width: 15px;
+  height: 15px;
+  font-size: 13px;
+  font-weight: 900;
+  color: #000;
+  margin: 5px;
+  border-radius: 2px;
+  display: inline-flex;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.generalTitle {
+  display: none;
+}
+
+.general, .generalTitle {
+  position: relative;
+  z-index: 4;
+}
+
+#info span, .general span,  .generalTitle span {
+  align-self: center;
+}
+
+
+#info:hover, .general:hover, .keyInfo:hover + #info,
+.generalinfo:hover + .general {
+  background-color: #0098d4;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.keyInfo:hover, .generalinfo:hover {
+  cursor: pointer;
+}
+
+.tooltipcont:hover .keyInfo {
+  display: block;
+}
+
+.generaltooltip:hover .generalinfo {
+  display: block;
+  padding-bottom: 15px;
+}
+
+.tooltipcont {
+  position: relative;
+  display: inline-block;
+}
+
+.generaltooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.checkelements {
+  width: 100%;
+  display: inline-flex;
+  padding: 2px 0 0 0;
+  margin-bottom: 6px;
+}
+
+.elementcontainer {
+  width: 50%;
+  height: auto;
+  display: block;
+  position: relative;
+}
+
+.elementcontainer:nth-child(1) {
+  margin-left: 33px;
+}
+
+.elementcontainer:nth-child(1) xui-checkbox:not(:nth-child(1)) {
+    padding-left: 23px;
+}
+
+#glowcolor {
+  position: relative;
+}
+
+#bordercolor {
+  position: relative;
+}
+
+#opacitySlider {
+  position: relative;
+}
+
+#lock {
+  margin-left: 26px;
+}
+
+.xuicontainer {
+  display: inline-block;
+  margin-bottom: 1px;
+}
+
+.xuicontainer label {
+  width: 56px;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: right;
+  padding-right: 5px;
+}
+
+.xuicontainer:nth-child(4) label
+{
+  text-align: right;
+  padding-right: 10px;
+  width: 80px;
+}
+
+.xuicontainer:nth-child(6)
+{
+  margin-bottom: 4px;
+}
+
+#innersection {
+  border: 1px solid #000;
+  padding: 5px;
+  background-color: #212121;
+}
+
+xui-section {
+  width: 97%;
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+xui-colorpicker /deep/ #colorPicker div#paletteContainer
+{
+  margin-top: -90px;
+}
+
+xui-checkbox /deep/ label
+{
+  cursor: pointer;
+}
+
+.text-left {
+  text-align: center;
+}
+.text-right{
+  text-align: right;
+}
+.text-center{
+  text-align: center;
+}
+.text-justify{
+  text-align: justify;
+}
+
+
+input[type=text], select, option
+{
+  width: 20em;
+  	height: 2.2em;
+  	display: inline-block;
+  	border: 0.1em solid #000;
+  	background-color: #393939;
+	background-color: transparent;
+	font-size: 1.2em;
+	padding: 0;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	color: #EEE !important;
+    outline: none;
+    text-indent: 0.5em;
+    
+}
