@@ -140,10 +140,13 @@ class startNLBC {
   run(){
     var self = this;
     console.log(self.args);
-    self.displayDonationTime =  5000;
-    self.displayAnimationTime = 1000;
-    self.runLatest = self.args.runLatest;
-    self.renderBars();
+    if(self.args !== undefined){
+      self.displayDonationTime =  5000;
+      self.displayAnimationTime = 1000;
+      self.runLatest = self.args.runLatest;
+      self.renderBars();  
+    }
+    
   }
 
   renderBars() {
@@ -152,23 +155,13 @@ class startNLBC {
     let _position = self.position || 'bottom';
     let tpl = rowTemplate.format(_position === 'bottom' ? 'matcherinoTickerBottom' : 'matcherinoTickerTop');
     $(tpl).appendTo('.container');
-    
-    self.fetchData();
-  }
-
-  fetchData(){
-    let self = this;
     let _promises = [];
-
     self.ids.forEach((o,i) => {
       _promises.push(self.getMatcherinoData(o,self.codes[i]));
     });
-
     Promise.all(_promises)
     .then( results => {
       let transactions = [];
-      $(".ovfailure").remove();
-
       results.forEach((o,i)=>{
         let itemContent = self.MatcherinoSkeletonItem.format(self.codes[i],`${self.formatter.format((o.balance/100))}`,`${self.formatter.format((o.meta.goal/100))}`);
         $(itemContent).appendTo('.matcherinoTicker');
@@ -182,7 +175,10 @@ class startNLBC {
         return a.id - b.id;
       });
       console.log('transactions', transactions);
+      //first merge all the objects results pools
+      // if runlatest is true, we cache everything and only show new objects incoming
       if(self.runLatest){
+        console.log('caching and show only new ones', self.runlatest);
         transactions.forEach((o,i) => {
           let obj = {
             action : o.action,
@@ -217,15 +213,6 @@ class startNLBC {
       self.ids.forEach((o,i) => {
         self.refreshData(o,i,self.codes[i]);
       });
-    })
-    .catch( function(err){
-      setTimeout(()=>{
-        if($(".ovfailure").length === 0){
-          $('<div class="ovfailure" style="position:absolute; bottom:0; left:0"><svg class="spinner" width="10px" height="10px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="path" fill="none" stroke-width="10" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div>').appendTo('body');
-        }
-        self.fetchData();
-      },1000);
-      
     });
   }
 
@@ -241,15 +228,11 @@ class startNLBC {
       })
       .done(function(data) {
         if(code){
-          if data.
           data.body.transactions.forEach((o,i)=>{
             data.body.transactions[i].code = code;
           });
         }
         resolve(data.body);
-      })
-      .fail(function(){
-        reject('data was not able to be read.');
       });
     });
   }
@@ -291,14 +274,12 @@ class startNLBC {
    */
   executeDonations (code,data,tag) {
     var self = this;
-    if(typeof data !== undefined){
-      data.forEach((o,i)=>{
+    data.forEach((o,i)=>{
       if(typeof self.cacheDonators[o.id] === 'undefined'){
         o.code = tag;
         self.pushNotification(o);
       }
     });
-    }
   }
 
   pushNotification(o) {

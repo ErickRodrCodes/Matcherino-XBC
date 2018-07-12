@@ -92,7 +92,7 @@ var count = 0;
       matcherinoIds: config.matcherinoIds === undefined ? "0001,0002,0003" : config.matcherinoIds,
       goalsPosition: config.goalsPosition === undefined ? "Bottom" : config.goalsPosition,
       positionNotification: config.positionNotification === undefined ? "Bottom" : config.positionNotification,
-      isNotificationLatest: config.isNotificationLatest === undefined ? true : config.isNotificationLatest //set this as default
+      isNotificationLatest: config.isNotificationLatest === undefined ? false : config.isNotificationLatest
     };
     console.log('loadData on startup',cfg);
     updateElements(cfg);

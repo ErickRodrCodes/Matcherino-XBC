@@ -25,6 +25,8 @@
     const stateCheck = setInterval(() => {
       if (document.readyState === 'complete') {
         clearInterval(stateCheck);
+        debugger;
+        console.log('config',config)
         var nlbc = new startNLBC();
         var args = {
           ids: config.matcherinoIds.split(','),
@@ -34,16 +36,11 @@
           displayDonationTime: 5000,
           displayAnimationTime: 1000
         };
-        //trimming  codes
-        for(let x = 0; x < args.codes.length; x++){
-          args.codes[x] = $.trim(args.codes[x]);
-        }
         nlbc._set('args',args);
         nlbc._set('ids', args.ids);
         nlbc._set('codes',args.codes);
         nlbc._set('position',args.pos);
-        nlbc._set('runLatest',args.runLatest === null || args.runLatest  === undefined ? true : args.runLatest);
-        console.log(args.runLatest)
+        nlbc._set('runLatest',args.runLatest);
         nlbc.run();
       }
     }, 100);

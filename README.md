@@ -1,6 +1,6 @@
-# Matcherino-XBC
+[![GitHub issues](https://img.shields.io/github/issues/tbogard/Matcherino-XBC.svg)](https://github.com/tbogard/Matcherino-XBC/issues) [![GitHub forks](https://img.shields.io/github/forks/tbogard/Matcherino-XBC.svg)](https://github.com/tbogard/Matcherino-XBC/network) [![GitHub stars](https://img.shields.io/github/stars/tbogard/Matcherino-XBC.svg)](https://github.com/tbogard/Matcherino-XBC/stargazers) [![GitHub license](https://img.shields.io/github/license/tbogard/Matcherino-XBC.svg)](https://github.com/tbogard/Matcherino-XBC/blob/master/LICENSE) [![Twitter](https://img.shields.io/twitter/url/https/github.com/tbogard/Matcherino-XBC.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Ftbogard%2FMatcherino-XBC)
 
-![](https://img.shields.io/github/stars/Matcherino-XBC/editor.md.svg) ![](https://img.shields.io/github/forks/Matcherino-XBC/editor.md.svg) ![](https://img.shields.io/github/tag/Matcherino-XBC/editor.md.svg) ![](https://img.shields.io/github/release/Matcherino-XBC/editor.md.svg) ![](https://img.shields.io/github/issues/Matcherino-XBC/editor.md.svg) ![](https://img.shields.io/bower/Matcherino-XBC/editor.md.svg)
+# Matcherino-XBC
 
 Matcherino Plugin for XSplit Broadcaster
 
