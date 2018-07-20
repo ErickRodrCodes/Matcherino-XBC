@@ -1,6 +1,6 @@
 /**
  * XSplit JS Framework
- * version: 2.8.0
+ * version: 2.8.1
  *
  * XSplit Extensibility Framework and Plugin License
  *
@@ -4242,71 +4242,52 @@ var Item = (function (_super) {
      * ```
      */
     Item.prototype.getSource = function () {
-        var _this = this;
-        var uniqueSource = [];
-        var uniqueObj = {};
-        var _xmlparams;
-        var _type;
-        var _srcId;
-        var promiseArray = [];
-        var _thisItem = this;
         return new Promise(function (resolve, reject) {
-            _this.getItemList().then(function (items) {
-                for (var i = 0; i < items.length; i++) {
-                    for (var key in items[i]) {
-                        if (key === '_srcId') {
-                            uniqueObj[items[i][key]] = items[i];
-                        }
-                    }
+            item_1.Item.get('config')
+                .then(function (config) {
+                var item = json_1.JSON.parse(config);
+                var type = Number(item['type']);
+                if (type === isource_1.ItemTypes.GAMESOURCE) {
+                    resolve(new game_1.GameSource(item));
                 }
-                for (var j in uniqueObj) {
-                    if (uniqueObj.hasOwnProperty(j)) {
-                        uniqueSource.push(uniqueObj[j]);
-                    }
+                else if ((type === isource_1.ItemTypes.HTML || type === isource_1.ItemTypes.FILE) &&
+                    item['name'].indexOf('Video Playlist') === 0 &&
+                    item['FilePlaylist'] !== '') {
+                    resolve(new videoplaylist_1.VideoPlaylistSource(item));
                 }
-                var typePromise = function (index) { return new Promise(function (typeResolve) {
-                    var source = uniqueSource[index];
-                    var params = source['_xmlparams'];
-                    var type = source.constructor.name;
-                    if (type === 'GameItem') {
-                        typeResolve(new game_1.GameSource(params));
-                    }
-                    else if (type === 'VideoPlaylistItem') {
-                        typeResolve(new videoplaylist_1.VideoPlaylistSource(params));
-                    }
-                    else if (type === 'HtmlItem') {
-                        typeResolve(new html_1.HtmlSource(params));
-                    }
-                    else if (type === 'ScreenItem') {
-                        typeResolve(new screen_1.ScreenSource(params));
-                    }
-                    else if (type === 'ImageItem') {
-                        typeResolve(new image_1.ImageSource(params));
-                    }
-                    else if (type === 'MediaItem') {
-                        typeResolve(new media_1.MediaSource(source));
-                    }
-                    else if (type === 'CameraItem') {
-                        typeResolve(new camera_1.CameraSource(params));
-                    }
-                    else if (type === 'AudioItem') {
-                        typeResolve(new audio_1.AudioSource(params));
-                    }
-                    else if (type === 'FlashItem') {
-                        typeResolve(new flash_1.FlashSource(params));
-                    }
-                    else {
-                        typeResolve(new source_1.Source(params));
-                    }
-                }); };
-                if (Array.isArray(uniqueSource)) {
-                    for (var i = 0; i < uniqueSource.length; i++) {
-                        promiseArray.push(typePromise(i));
-                    }
+                else if (type === isource_1.ItemTypes.HTML) {
+                    resolve(new html_1.HtmlSource(item));
                 }
-                Promise.all(promiseArray).then(function (results) {
-                    resolve(results[0]);
-                });
+                else if (type === isource_1.ItemTypes.SCREEN) {
+                    resolve(new screen_1.ScreenSource(item));
+                }
+                else if (type === isource_1.ItemTypes.BITMAP ||
+                    type === isource_1.ItemTypes.FILE &&
+                        /\.gif$/.test(item['item'])) {
+                    resolve(new image_1.ImageSource(item));
+                }
+                else if (type === isource_1.ItemTypes.FILE &&
+                    /\.(gif|xbs)$/.test(item['item']) === false &&
+                    /^(rtsp|rtmp):\/\//.test(item['item']) === false &&
+                    new RegExp(media_1.MediaTypes.join('|')).test(item['item']) === true) {
+                    resolve(new media_1.MediaSource(item));
+                }
+                else if (Number(item['type']) === isource_1.ItemTypes.LIVE &&
+                    item['item'].indexOf('{33D9A762-90C8-11D0-BD43-00A0C911CE86}') === -1) {
+                    resolve(new camera_1.CameraSource(item));
+                }
+                else if (Number(item['type']) === isource_1.ItemTypes.LIVE &&
+                    item['item'].indexOf('{33D9A762-90C8-11D0-BD43-00A0C911CE86}') !== -1) {
+                    resolve(new audio_1.AudioSource(item));
+                }
+                else if (Number(item['type']) === isource_1.ItemTypes.FLASHFILE) {
+                    resolve(new flash_1.FlashSource(item));
+                }
+                else {
+                    resolve(new source_1.Source(item));
+                }
+            }).catch(function (err) {
+                reject(err);
             });
         });
     };
@@ -9841,15 +9822,13 @@ var Source = (function () {
                 version_1.versionCompare(version_1.getVersion())
                     .is
                     .greaterThan(version_1.minVersion)) {
-                Source.getItemList().then(function (items) {
-                    if (items.length > 0) {
-                        items[0].getSource().then(function (source) {
-                            resolve(source);
-                        });
-                    }
-                    else {
-                        reject(Error('Cannot get item list'));
-                    }
+                item_1.Item.get('itemlist').then(function (itemlist) {
+                    var itemId = itemlist.split(',')[0];
+                    scene_1.Scene.searchItemsById(itemId).then(function (item) {
+                        return item.getSource();
+                    }).then(function (source) {
+                        resolve(source);
+                    }).catch(function () { return resolve(null); });
                 });
             }
             else if (environment_1.Environment.isSourcePlugin() || environment_1.Environment.isSourceProps()) {

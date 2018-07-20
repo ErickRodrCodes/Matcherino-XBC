@@ -179,22 +179,25 @@ class startNLBC {
       // if runlatest is true, we cache everything and only show new objects incoming
       if(self.runLatest){
         console.log('caching and show only new ones', self.runlatest);
-        transactions.forEach((o,i) => {
-          let obj = {
-            action : o.action,
-            amount : o.amount,
-            authProvider : o.authProvider,
-            comment : o.comment,
-            displayName : o.displayName,
-            avatar: o.avatar,
-            code: o.code
-          };
-          self.cacheDonators[o.id] = obj;
-        });
+        if(Array.isArray(transactions) && transactions[0] !== null){
+          transactions.forEach((o,i) => {
+            let obj = {
+              action : o.action,
+              amount : o.amount,
+              authProvider : o.authProvider,
+              comment : o.comment,
+              displayName : o.displayName,
+              avatar: o.avatar,
+              code: o.code
+            };
+            self.cacheDonators[o.id] = obj;
+          });  
+        }
         self.runlatest = false;
       } else {
         console.log('showing everything', self.runlatest);
-        transactions.forEach((o,i) => {
+        if(Array.isArray(transactions) && transactions[0] !== null){
+          transactions.forEach((o,i) => {
           let obj = {
             action : o.action,
             amount : o.amount,
@@ -206,8 +209,9 @@ class startNLBC {
           };
           self.cacheDonators[o.id] = obj;
           self.pushNotification(o);
-
-        });
+        });  
+        }
+        
         
       }
       self.ids.forEach((o,i) => {
@@ -228,9 +232,11 @@ class startNLBC {
       })
       .done(function(data) {
         if(code){
-          data.body.transactions.forEach((o,i)=>{
-            data.body.transactions[i].code = code;
-          });
+          if(data.body.transactions !== null){
+            data.body.transactions.forEach((o,i)=>{
+              data.body.transactions[i].code = code;
+            });  
+          }
         }
         resolve(data.body);
       });
@@ -274,12 +280,14 @@ class startNLBC {
    */
   executeDonations (code,data,tag) {
     var self = this;
-    data.forEach((o,i)=>{
-      if(typeof self.cacheDonators[o.id] === 'undefined'){
-        o.code = tag;
-        self.pushNotification(o);
-      }
-    });
+    if(data){
+      data.forEach((o,i)=>{
+        if(typeof self.cacheDonators[o.id] === 'undefined'){
+          o.code = tag;
+          self.pushNotification(o);
+        }
+      });
+    }
   }
 
   pushNotification(o) {
