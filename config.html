@@ -6,6 +6,10 @@
   <link rel="import" href="bower_components/xui/imports.html" />
   <link rel="stylesheet" type="text/css" href="css/config.css">
   <link rel="stylesheet" type="text/css" href="css/flexbox.css">
+  <script type="text/javascript">
+    function OnActivate(){}
+    window.OnActivate = function(){}
+  </script>
 </head>
 <body>
   <xui-section label="Matcherino Notification Properties">
@@ -62,10 +66,8 @@
             <br>
           </label></div>
           <div class="row__item">
-            <select id="goalsPosition">
-              <option value="top">Top</option>
-              <option value="bottom">Bottom</option>
-            </select>
+          <label for="PositionNotification"><input type="radio" name="position" value="top" id="topPosition"> Top</label>
+          <label for="PositionNotification"><input type="radio" name="position" value="bottom" id="BottomPosition"> Bottom</label>
         </div>
         </div>
         <div class="row" style="display: none">
@@ -86,10 +88,8 @@
             </label>
           </div>
           <div class="row__item">
-            <select id="positionNotification">
-              <option value="top">Top</option>
-              <option value="bottom">Bottom</option>
-            </select>
+           <!--  <label for="PositionNotification"><input type="checkbox" name="position" value="top" id="topPosition"> Top</label>
+            <label for="PositionNotification"><input type="checkbox" name="position" value="bottom" id="BottomPosition"> Bottom</label> -->
           </div>
         </div>
         <div class="row">
