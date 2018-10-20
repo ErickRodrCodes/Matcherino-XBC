@@ -11,10 +11,9 @@ xjs.ready()
   mySource = currentSource;
   return mySource.loadConfig();
 }).then( config => {
-  debugger;
   // Do some checking to see if we already have settings saved.
   // The config should be empty if this is the first time the source is added.
-  var ls = localStorage.getItem('pluginConfig')
+  var ls = localStorage.getItem(pluginKey);
   pluginConfig = JSON.parse(ls);
   if (pluginConfig !== null) {
     console.log("source - there is data already saved", pluginConfig);
@@ -29,9 +28,9 @@ xjs.ready()
   // value in the configuration object to indicate that the defaults have
   // already been applied. If the user refreshes the source, you will
   // know not to override your user's position/size settings!
-  debugger;
   if(pluginConfig !== null){
     var nlbc = new startNLBC();
+    debugger;
     var args = {
       ids: pluginConfig.matcherinoIds,
       codes: pluginConfig.matcherinoCodes,
@@ -41,8 +40,8 @@ xjs.ready()
       displayAnimationTime: 1000
     };
     nlbc._set('args', args);
-    nlbc._set('ids', args.ids);
-    nlbc._set('codes', args.codes);
+    nlbc._set('ids', args.ids.split(','));
+    nlbc._set('codes', args.codes.split(','));
     nlbc._set('position', args.pos);
     nlbc._set('runLatest', args.runLatest);
     nlbc.run();

@@ -1,5 +1,32 @@
 // within your config HTML
 var xjs = require('xjs');
+var propsWindow = null;
+var pluginConfig = null;
+var currentSource = null;
+const pluginKey = 'MatcherinoPluginForXBCv2.0.0';
+const elements = {
+  matcherinoCodes: $("#matcherinoCodes"),
+  matcherinoIds: $("#matcherinoIds"),
+  goalsPosition: $(`input[name='position']:checked`),
+  positionNotification: $("#positionNotification"),
+  isNotificationLatest: $("#isNotificationLatest"),
+  submitData: $("#submitData")
+};
+
+const updateConfig = function (item) {
+  var config = {
+    matcherinoCodes: elements.matcherinoCodes.val(),
+    matcherinoIds: elements.matcherinoIds.val(),
+    goalsPosition: $(`input[name='position']:checked`).val(),
+    positionNotification: 'bottom',
+    isNotificationLatest: elements.isNotificationLatest.is(":checked"),
+    displayDonationTime: 5000,
+    displayAnimationTime: 1000,
+  };
+  localStorage.setItem(pluginKey, JSON.stringify(config));
+  item.refresh();
+};
+
 
 document.onselectstart = function (event) {
   var nodeName = event.target.nodeName;
@@ -23,37 +50,6 @@ document.onkeydown = function (event) {
 };
 document.oncontextmenu = function () { return false; };
 
-
-
-var propsWindow = null;
-var pluginConfig = null;
-var currentSource = null;
-const pluginKey = 'MatcherinoPluginForXBCv2.0.0';
-const elements = {
-  matcherinoCodes: $('#matcherinoCodes'),
-  matcherinoIds: $('#matcherinoIds'),
-  goalsPosition: $('#goalsPosition'),
-  positionNotification: $('#positionNotification'),
-  isNotificationLatest: $('#isNotificationLatest'),
-  submitData: $('#submitData')
-};
-
-const updateConfig = function (item) {
-  var config = {
-    matcherinoCodes: elements.matcherinoCodes.val(),
-    matcherinoIds: elements.matcherinoIds.val(),
-    goalsPosition: elements.goalsPosition.find('option:selected').val(),
-    positionNotification: elements.positionNotification.find('option:selected').val(),
-    isNotificationLatest: elements.isNotificationLatest.is(":checked"),
-    displayDonationTime: 5000,
-    displayAnimationTime: 1000
-  };
-  localStorage.setItem(pluginKey,JSON.stringify(config));
-  item.refresh();
-};
-
-
-
 // Option 1: Use XSplit's existing tab system
 xjs.ready()
 .then(function () {
@@ -68,13 +64,14 @@ xjs.ready()
 })
 .then (item => item.loadConfig())
 .then (config => {
-  var ls = localStorage.getItem("pluginConfig");
+  var ls = localStorage.getItem(pluginKey);
   ls = JSON.parse(ls);
   if (ls === null) {
     pluginConfig = { 
       matcherinoIds: "12490", 
       matcherinoCodes: "ECT2018", 
       isNotificationLatest: true,
+      goalsPosition: 'bottom',
       positionNotification: 'bottom',
       displayDonationTime : 5000,
       displayAnimationTime : 1000
@@ -86,7 +83,7 @@ xjs.ready()
   }
   elements.matcherinoIds.val(pluginConfig.matcherinoIds);
   elements.matcherinoCodes.val(pluginConfig.matcherinoCodes);
-  elements.positionNotification.val(pluginConfig.goalsPosition);
+  $(`input[name='position'][value='${pluginConfig.goalsPosition}']`).prop('checked',true);
   elements.isNotificationLatest.prop("checked", pluginConfig.isNotificationLatest ? true : false );
   return currentSource
 })
