@@ -140,7 +140,7 @@ class startNLBC {
   run(){
     var self = this;
     console.log(self.args);
-    if(self.args !== undefined){
+    if(self.args !== null){
       self.displayDonationTime =  5000;
       self.displayAnimationTime = 1000;
       self.runLatest = self.args.runLatest;
