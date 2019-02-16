@@ -1,6 +1,6 @@
 {
   "name": "sourceplugin",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "dependencies": {
     "browser-sync": "^2.7.13",
     "gulp": "^3.9.0"
