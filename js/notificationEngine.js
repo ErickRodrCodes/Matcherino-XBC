@@ -108,9 +108,9 @@ class startNLBC {
     this.donationCashStr = '<span class="nContent"><img src="{0}" class="serviceLogo"/><img src="{1}" class="avatar"/> <span class="highlight">{2}</span> has donated <span class="highlight">{3}</span> in cash to {4}!</span>';
     this.donationCodeStr = '<span class="nContent"><img src="{0}" class="serviceLogo"/><img src="{1}" class="avatar"/> <span class="highlight">{2}</span> has donated <span class="highlight">{3}</span> using Matcherino Code {4}!</span>';
     this.donationRewaStr = '<span class="nContent"><img src="{0}" class="serviceLogo"/><img src="{1}" class="avatar"/> <span class="highlight">{2}</span> has added <span class="highlight">{3}</span> buying Matcherino rewards for {4}!</span>';
-    this.twitchIcon = 'https://matcherino.com/public/3.6.4/img/Glitch_Purple_RGB.png';
-    this.googleIcon = 'https://matcherino.com/public/3.6.4/img/btn_google_light_normal_ios.png';
-    this.twitterIcon = 'https://matcherino.com/public/3.6.4/img/Twitter_Logo_Blue.png';
+    this.twitchIcon = 'https://matcherino.com/public/3.80.11/img/Glitch_Purple_RGB.png';
+    this.googleIcon = 'https://matcherino.com/public/3.80.11/img/btn_google_light_normal_ios.png';
+    this.twitterIcon = 'https://matcherino.com/public/3.80.11/img/Twitter_Logo_Blue.png';
     this.dataRetriever = [];
     this.MatcherinoSkeletonItem = '<div class="tickerItem {0}">Code {0}: <span class="current">{1}</span>/<span class="total">{2}</span></div>';
     this.intervalObjs = [];
@@ -128,11 +128,8 @@ class startNLBC {
     console.log(`this[${variable}]`, this[variable]);
   }
   /**
-   * [_get is an universal method to get the value of a property of this class]
-   * @param  {String} variable [name of the variable]
-   * @return {Any}             [the value that such property has]
-   */
-  _get(variable = '') {
+   * [_get is an universal method to get the value ofa property of this class]   * param  {String} variable [name of the variable]   * @return {Any}             [the value that such propery has]
+   */  _get(variable = '') {
     console.trace(`this[${variable}]`, this[variable]);
     return this[variable];
   }
