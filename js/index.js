@@ -1,50 +1,77 @@
-const xjs = require('xjs');
-const Source = xjs.Source;
-var mySource = null;
-var pluginConfig = null;
-const pluginKey = "MatcherinoPluginForXBCv2.0.0";
-
-// within the source HTML, we initialize the settings
-xjs.ready()
-.then(Source.getCurrentSource)
-.then( currentSource => {
-  mySource = currentSource;
-  return mySource.loadConfig();
-}).then( config => {
-  // Do some checking to see if we already have settings saved.
-  // The config should be empty if this is the first time the source is added.
-  var ls = localStorage.getItem(pluginKey);
-  pluginConfig = JSON.parse(ls);
-  if (pluginConfig !== null) {
-    console.log("source - there is data already saved", pluginConfig);
-  }
-  return mySource.setName("Matcherino Plugin for XBC V2.0");
-}).then( mySource => {
-  // Property setters are chainable, so they resolve with the same object!
-  // This means you can continue setting any properties.
-  return mySource.setKeepLoaded(true); // always keep loaded in memory
-}).then( mySource => {
-  // Continue initialization as necessary. We recommend saving a dummy
-  // value in the configuration object to indicate that the defaults have
-  // already been applied. If the user refreshes the source, you will
-  // know not to override your user's position/size settings!
-  if(pluginConfig !== null){
-    var nlbc = new startNLBC();
-    debugger;
-    var args = {
-      ids: pluginConfig.matcherinoIds,
-      codes: pluginConfig.matcherinoCodes,
-      runLatest: pluginConfig.isNotificationLatest,
-      pos: pluginConfig.goalsPosition,
-      displayDonationTime: 5000,
-      displayAnimationTime: 1000
-    };
-    nlbc._set('args', args);
-    nlbc._set('ids', args.ids.split(','));
-    nlbc._set('codes', args.codes.split(','));
-    nlbc._set('position', args.pos);
-    nlbc._set('runLatest', args.runLatest);
-    nlbc.run();
-  }
-});
+(function(){
+  'use strict';
+  var xjs = require('xjs');
+  var Item = xjs.Source;
+  var myItem;
+  var _cnf;
+  var tempConfig = {};
+  const PluginTitle = 'Matcherino Plugin for XBC';
   
+  var initializePlugin = function(config){
+    //Apply config on Load
+    myItem.loadConfig().then(function(config) {
+      updateHTML(config);
+      updateData(config);
+    });
+    //Apply config on Save
+    xjs.SourcePluginWindow.getInstance().on('save-config', function(config) {
+      updateHTML(config);
+      updateData(config);
+    });
+    updateData(config,true);
+  };
+
+  var updateHTML = function(config,isInitial) {
+    const stateCheck = setInterval(() => {
+      if (document.readyState === 'complete') {
+        clearInterval(stateCheck);
+        console.log('config',config)
+        var nlbc = new startNLBC();
+        var args = {
+          ids: config.matcherinoIds.split(','),
+          codes: config.matcherinoCodes.split(','),
+          runLatest: config.isNotificationLatest,
+          pos: config.goalsPosition,
+          displayDonationTime: 5000,
+          displayAnimationTime: 1000
+        };
+        nlbc._set('args',args);
+        nlbc._set('ids', args.ids);
+        nlbc._set('codes',args.codes);
+        nlbc._set('position',args.pos);
+        nlbc._set('runLatest',args.runLatest);
+        nlbc.run();
+      }
+    }, 100);
+  };
+
+  //Merge config to tempConfig
+  var updateData = function(config,isInitial) {    
+    myItem.saveConfig(config);
+  };
+
+
+  xjs.ready()
+  .then(Item.getCurrentSource)
+  .then(function(item) {
+    myItem = item;
+    debugger;
+    return item.loadConfig();
+  })
+  .then(function(config){
+    _cnf = config;
+    updateData(config, true);  
+    return myItem.setName(PluginTitle);
+  })
+  .then(xjs.Item.getItemList)
+  .then(listItems => {
+    const currentItem = listItems[0];
+    currentItem.setBrowserCustomSize(xjs.Rectangle.fromDimensions(1920,1080));
+    currentItem.setPosition(xjs.Rectangle.fromCoordinates(0,0,1,1));
+    currentItem.setPositionLocked(true);
+    return myItem;
+  })
+  .then(function(item){   
+    initializePlugin(_cnf);
+  })
+})();
