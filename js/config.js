@@ -1,7 +1,7 @@
 var count = 0;
 (function () {
   'use strict';
-  const PluginTitle = 'Matcherino Plugin for XBC';
+  const PluginTitle = 'Matcherino Plugin for XBC v2.0.3';
   document.onselectstart = function (event) {
     var nodeName = event.target.nodeName;
     if (nodeName === "INPUT" || nodeName === "TEXTAREA" || nodeName === "XUI-INPUT" || nodeName === "XUI-SLIDER") {
