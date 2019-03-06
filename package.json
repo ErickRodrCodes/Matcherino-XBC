@@ -1,6 +1,6 @@
 {
   "name": "sourceplugin",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "dependencies": {
     "browser-sync": "^2.26.3",
     "browsersync": "0.0.1-security",
