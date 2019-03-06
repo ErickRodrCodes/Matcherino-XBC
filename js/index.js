@@ -66,9 +66,9 @@
   .then(xjs.Item.getItemList)
   .then(listItems => {
     const currentItem = listItems[0];
-    currentItem.setBrowserCustomSize(xjs.Rectangle.fromDimensions(1920,1080));
-    currentItem.setPosition(xjs.Rectangle.fromCoordinates(0,0,1,1));
-    currentItem.setPositionLocked(true);
+    // currentItem.setBrowserCustomSize(xjs.Rectangle.fromDimensions(1920,1080));
+    // currentItem.setPosition(xjs.Rectangle.fromCoordinates(0,0,1,1));
+    // currentItem.setPositionLocked(true);
     return myItem;
   })
   .then(function(item){   
